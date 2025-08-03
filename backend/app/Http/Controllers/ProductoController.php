@@ -73,7 +73,27 @@ class ProductoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'sometimes|required|string|max:255',
+            'precio' => 'sometimes|required|numeric',
+            'marca_id' => 'sometimes|required|exists:marcas,id',
+        ]);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+        $producto = Producto::find($id);
+        if (!$producto) {
+            $data = [
+                'mensaje' => 'Producto no encontrado',
+            ];
+            return response()->json($data, 404);
+        }
+        $producto->update($request->all());
+        $data = [
+            'mensaje' => 'Producto actualizado exitosamente',
+            'producto' => $producto,
+        ];
+        return response()->json($data, 200);
     }
 
     /**
