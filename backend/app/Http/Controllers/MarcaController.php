@@ -34,7 +34,7 @@ class MarcaController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nombre' => 'required|string|max:255',
+            'nombre' => 'required|string|max:255|unique:marcas,nombre',
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
@@ -72,7 +72,7 @@ class MarcaController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'nombre' => 'required|string|max:255',
+            'nombre' => 'required|string|max:255|unique:marcas,nombre,' . $id,
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
