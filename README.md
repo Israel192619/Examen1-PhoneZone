@@ -6,7 +6,7 @@ Este proyecto es una API RESTful desarrollada con **Laravel 12.0**. Permite el r
 
 ## Requisitos
 
-- PHP >= 8.2
+- PHP >= 8.2 (puedes usar XAMPP, Laragon, MAMP o un entorno personalizado)
 - Composer
 - MySQL o MariaDB
 - Laravel 12+
